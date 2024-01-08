@@ -55,25 +55,28 @@ function SizeBar() {
 
     return (
         <div>
-            <div className="container bg-success bg-opacity-25">
+            <div className="container bg-success bg-opacity-25 shadow">
                 <div className="py-3">
                     <ProgressBar className="my-3">
                         <ProgressBar
                             variant="primary"
                             now={filledPercentage}
                             label={`Filled: ${filledPercentage.toFixed(2)}%`}
+                            style={{ color: 'black' }}
                             key={1}
                         />
                         <ProgressBar
                             variant="danger"
                             now={uploadPercentage}
                             label={`Uploads: ${uploadPercentage.toFixed(2)}%`}
+                            style={{ color: 'black' }}
                             key={2}
                         />
                         <ProgressBar
                             variant="light"
                             now={availablePercentage}
                             label={`Available: ${availablePercentage.toFixed(2)}%`}
+                            style={{ color: 'black' }}
                             key={3}
                         />
                     </ProgressBar>
@@ -85,16 +88,16 @@ function SizeBar() {
                 </div>
                 <div className="row d-flex align-items-center rounded-lg">
                     <div className="col">
-                        <p>Total Size: {formatSize(totalSize)}</p>
+                        <small className="fs-8"> <b>Total Size: </b> {formatSize(totalSize)}</small>
                     </div>
                     <div className="col">
-                        <p>Filled Size: {formatSize(filledSize)}</p>
+                        <small className="fs-8"> <b>Filled Size: </b>  {formatSize(filledSize)}</small>
                     </div>
                     <div className="col">
-                        <p>Upload Size: {formatSize(uploadSize)}</p>
+                        <small className="fs-8"> <b>Upload Size: </b>  {formatSize(uploadSize)}</small>
                     </div>
                     <div className="col">
-                        <p>Available Size: {formatSize(availableSize)}</p>
+                        <small className="fs-8"> <b>Available Size: </b>  {formatSize(availableSize)}</small>
                     </div>
                 </div>
             </div>
