@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Form } from 'react-bootstrap';
 
-function PermissionsSwitch(props) {
-    const [permissions, setPermissions] = useState(props.permissions);
+function PermissionsSwitch({permissions}) {
+    const [thisPermissions, setPermissions] = useState(permissions);
 
     const togglePermissions = () => {
         setPermissions(!permissions);
@@ -16,7 +16,7 @@ function PermissionsSwitch(props) {
           type="switch"
           id="custom-switch"
           label="Permission"
-          checked={permissions}
+          checked={thisPermissions}
           onChange={togglePermissions}
         />
       </Form>

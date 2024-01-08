@@ -1,31 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import ActivityModal from "./ActivityModal";
 
-function ViewActivity(props) {
+function ViewActivity({Name}) {
 
-    const [Activity, SetActivity] = useState([]);
+    const [isModalVisible, setModalVisibility] = useState(false);
 
-    const viewActivity = () => {
+    const ViewActivity = () => {
+        setModalVisibility(true)
+    }
 
-        axios.get(process.env.REACT_APP_SERVER_HOSTED_ON + '/getActivity/' + props.Name, {
-            headers: { 'Authorization': 'Bearer ' + Cookies.get('token') }
-        }).then((response) => {
-            console.log(response.data);
-            if (response.data.success === false) {
-                Cookies.remove('token');
-                window.location.href = '/';
-            } else {
-                SetActivity(response.data);
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-
+    const closeModal = () => {
+        setModalVisibility(false);
     }
 
     return (
-        <button className="btn btn-primary w-100" onClick={viewActivity}>👁️ View Activity </button>
+        <>
+            <button className="btn btn-primary w-100" onClick={ViewActivity}>👁️ View Activity </button>
+            <ActivityModal targetName={Name} isVisible={isModalVisible} closeModal={closeModal} />
+        </>
     )
 }
 

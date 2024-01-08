@@ -31,7 +31,7 @@ function TargetCards() {
         fetchTargets();
     }, []);
 
-    // target is an array of objects and each object has the following properties:
+    // targets is an array of objects and each object has the following properties:
     // Name, LastContact, FirstContact, EarliestActivityStored, Allowed
 
     return (
