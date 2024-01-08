@@ -2,29 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import ViewActivity from "./ViewActivity";
-import { convertIsoToNormalTime, getTimeElapsed } from "../Scripts/TimeFunctions";
 import PermissionsSwitch from "./PermissionsSwitch"
 import DateTimeActivity from "./DateTimeActivity";
-
+import { AxiosGET } from "../Scripts/AxiosRequest";
 function TargetCards() {
 
     const [targets, setTargets] = useState([]);
 
     const fetchTargets = async () => {
-        axios.get(process.env.REACT_APP_SERVER_HOSTED_ON + '/getTargets', {
-            headers: { 'Authorization': 'Bearer ' + Cookies.get('token') }
-        }).then((response) => {
-            console.log(response.data);
-            if (response.data.success === false) {
-                Cookies.remove('token');
-                window.location.href = '/';
-            }
-            else {
-                setTargets(response.data.targets);
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
+
+        const response = await AxiosGET("/getTargets",Cookies.get('token'))
+        setTargets(response.targets)
+
     }
 
     useEffect(() => {

@@ -1,6 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { useState } from "react";
 import ActivityModal from "./ActivityModal";
 
 function ViewActivity({Name}) {

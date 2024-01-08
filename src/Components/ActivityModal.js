@@ -1,11 +1,9 @@
 import { Modal } from 'react-bootstrap';
-import { faDownload, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import ImageComponent from './imageComponent';
-
+import {AxiosGET} from '../Scripts/AxiosRequest';
+import FooterUtilityButtons from './footerUtilityButtons';
 
 //this component will be used to display the activity modal when a user clicks on an activity
 //it will display the TargetName, Image, Description, and a button to close the modal
@@ -15,33 +13,30 @@ import ImageComponent from './imageComponent';
 //this Components takes in 3 props
 //targetName: the name of the target the the modal belongs to
 //isVisible: a boolean that determines if the modal is visible or not
-
+//closeModal : a function that closes the modal
 
 function ActivityModal({ targetName, isVisible, closeModal }) {
 
     const [activityArray, setActivityArray] = useState([]);
+    const [sliderValue, setSliderValue] = useState(0); // State to manage slider value
 
-    const viewActivity = () => {
-
-        axios.get(process.env.REACT_APP_SERVER_HOSTED_ON + '/getActivity/' + targetName, {
-            headers: { 'Authorization': 'Bearer ' + Cookies.get('token') }
-        }).then((response) => {
-            console.log(response.data);
-            if (response.data.success === false) {
-                Cookies.remove('token');
-                window.location.href = '/';
-            } else {
-                setActivityArray(response.data.files);
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-
+    const viewActivity = async () => {
+        console.log("asd")
+        let data = await AxiosGET('/getActivity/' + targetName, Cookies.get('token'))
+        console.log(data)
+        setActivityArray(data.files)
     }
-
     useEffect(() => {
-        viewActivity();
+        viewActivity(); // this will only run once (on mount)
     }, []);
+
+    const downloadImage = (sliderValue) => {
+        const imageUrl = process.env.REACT_APP_SERVER_HOSTED_ON + '/' + targetName + '/' + activityArray[sliderValue];
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = `Image_${sliderValue}`;
+        link.click();
+    };
 
     if (activityArray.length > 0) {
 
@@ -51,24 +46,10 @@ function ActivityModal({ targetName, isVisible, closeModal }) {
                     <Modal.Title>Target : {targetName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ImageComponent ImageArray={activityArray} Name={targetName} />
+                    <ImageComponent ImageArray={activityArray} Name={targetName} sliderValue={sliderValue} setSliderValue={setSliderValue} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-6">
-                                <button type="button" className="btn btn-primary w-100" id="downloadFrameButton" >
-                                    <FontAwesomeIcon icon={faDownload} className="me-2" />
-                                </button>
-                            </div>
-                            <div className="col-6">
-                                <button type="button" className="btn btn-danger w-100" id="deleteFrameButton" >
-                                    <FontAwesomeIcon icon={faTrash} className="me-2" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
+                    <FooterUtilityButtons sliderValue={sliderValue} activityArray={activityArray} targetName={targetName}/>
                 </Modal.Footer>
             </Modal>
         );
