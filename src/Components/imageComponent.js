@@ -9,7 +9,7 @@ function ImageComponent({ ImageArray, Name, sliderValue, setSliderValue  }) {
     return (
         <>
             <div className="row text-center">
-                <p>Frame: {sliderValue} / {ImageArray.length - 1}</p>
+                <p>Frame: {sliderValue + 1} / {ImageArray.length}</p>
             </div>
             <div className="row">
                 <div className="img-container" style={{ maxHeight: '80vh', overflow: 'hidden' }}>

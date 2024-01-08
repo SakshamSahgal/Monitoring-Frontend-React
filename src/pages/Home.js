@@ -34,9 +34,7 @@ function Home() {
                 <div className="row">
                     <SizeBar />
                 </div>
-                <div className="row">
                     <TargetCards />
-                </div>
             </div>
         </>
     )

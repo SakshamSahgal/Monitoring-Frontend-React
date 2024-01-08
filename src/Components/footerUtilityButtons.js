@@ -1,7 +1,9 @@
 import { faDownload, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {AxiosPOST} from "../Scripts/AxiosRequest";
+import Cookies from "js-cookie";
 
-function FooterUtilityButtons({sliderValue, activityArray, targetName}) {
+function FooterUtilityButtons({sliderValue, activityArray, targetName, viewActivity}) {
 
     const downloadImage = async () => {
         try {
@@ -11,12 +13,18 @@ function FooterUtilityButtons({sliderValue, activityArray, targetName}) {
     
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = `Image_${sliderValue}`;
+            link.download = activityArray[sliderValue];
             link.click();
         } catch (error) {
             console.error('Error downloading image:', error);
         }
     };
+
+    const DeleteImageFromServer = async () => {
+        console.log("delete image")
+        await AxiosPOST("/deleteImage" + "/" + targetName + "/" + activityArray[sliderValue],Cookies.get("token"));
+        viewActivity();
+    }
 
     return (
         <div className="container-fluid">
@@ -27,8 +35,8 @@ function FooterUtilityButtons({sliderValue, activityArray, targetName}) {
                     </button>
                 </div>
                 <div className="col-6">
-                    <button type="button" className="btn btn-danger w-100" id="deleteFrameButton" >
-                        <FontAwesomeIcon icon={faTrash} className="me-2" />
+                    <button type="button" className="btn btn-danger w-100" id="deleteFrameButton" onClick={DeleteImageFromServer}>
+                        <FontAwesomeIcon icon={faTrash} className="me-2"/>
                     </button>
                 </div>
             </div>
