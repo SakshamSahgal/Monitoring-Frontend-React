@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ActivityModal from "./ActivityModal";
+import ActivityModal from "./ModalComponents/ActivityModal";
 
 function ViewActivity({Name}) {
 
@@ -8,6 +8,8 @@ function ViewActivity({Name}) {
     const ViewActivity = () => {
         setModalVisibility(true)
     }
+
+    console.log("rendering ViewActivity")
 
     const closeModal = () => {
         setModalVisibility(false);

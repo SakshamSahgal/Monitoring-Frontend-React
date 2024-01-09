@@ -5,7 +5,7 @@ async function AxiosGET(APIroute, token) {
     try {
         const response = await axios.get(process.env.REACT_APP_SERVER_HOSTED_ON + APIroute, { headers: { 'Authorization': 'Bearer ' + token } });
 
-        console.log(response.data);
+        // console.log(response.data);
 
         if (response.data.success === false) {
             Cookies.remove('token');

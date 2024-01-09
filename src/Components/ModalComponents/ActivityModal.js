@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import ImageComponent from './imageComponent';
-import { AxiosGET } from '../Scripts/AxiosRequest';
+import { AxiosGET } from '../../Scripts/AxiosRequest';
 import FooterUtilityButtons from './footerUtilityButtons';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,10 +20,13 @@ import Button from 'react-bootstrap/Button';
 
 function ActivityModal({ targetName, isVisible, closeModal }) {
 
+    console.log("rendering ActivityModal")
+
     const [activityArray, setActivityArray] = useState([]);
     const [sliderValue, setSliderValue] = useState(0); // State to manage slider value
 
     const viewActivity = async () => {
+        console.log("fetching activity data for " + targetName)
         let data = await AxiosGET('/getActivity/' + targetName, Cookies.get('token'))
         console.log(data)
         setActivityArray(data.files)
@@ -31,14 +34,6 @@ function ActivityModal({ targetName, isVisible, closeModal }) {
     useEffect(() => {
         viewActivity(); // this will only run once (on mount)
     }, []);
-
-    const downloadImage = (sliderValue) => {
-        const imageUrl = process.env.REACT_APP_SERVER_HOSTED_ON + '/' + targetName + '/' + activityArray[sliderValue];
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = `Image_${sliderValue}`;
-        link.click();
-    };
 
     if (activityArray.length > 0) {
 
@@ -51,10 +46,10 @@ function ActivityModal({ targetName, isVisible, closeModal }) {
                     </Button>
                 </Modal.Header>
                 <Modal.Body>
-                    <ImageComponent ImageArray={activityArray} Name={targetName} sliderValue={sliderValue} setSliderValue={setSliderValue} />
+                    <ImageComponent activityArray={activityArray} Name={targetName} sliderValue={sliderValue} setSliderValue={setSliderValue} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <FooterUtilityButtons sliderValue={sliderValue} activityArray={activityArray} targetName={targetName} viewActivity={viewActivity} />
+                    <FooterUtilityButtons sliderValue={sliderValue} activityArray={activityArray} targetName={targetName} viewActivity={viewActivity} setSliderValue={setSliderValue}/>
                 </Modal.Footer>
             </Modal>
         );
