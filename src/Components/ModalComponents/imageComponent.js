@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function ImageComponent({ activityArray, Name, sliderValue, setSliderValue  }) {
+function ImageComponent({ activityArray, Name, sliderValue, setSliderValue }) {
 
     const handleChange = (event) => {
         setSliderValue(parseInt(event.target.value));
@@ -14,7 +15,7 @@ function ImageComponent({ activityArray, Name, sliderValue, setSliderValue  }) {
             <div className="row">
                 <div className="img-container" style={{ maxHeight: '80vh', overflow: 'hidden' }}>
                     <img
-                        src={process.env.REACT_APP_SERVER_HOSTED_ON + '/' + Name + '/' + activityArray[sliderValue]}
+                        src={axios.defaults.baseURL + '/' + Name + '/' + activityArray[sliderValue]}
                         alt={`Image ${sliderValue}`}
                         className="img-fluid"
                     />

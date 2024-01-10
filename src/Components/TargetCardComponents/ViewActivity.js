@@ -16,8 +16,6 @@ function ViewActivity({Name}) {
         setModalVisibility(!isModalVisible)
     }
 
-    console.log("rendering ViewActivity")
-
     const closeModal = () => {
         setModalVisibility(false);
     }

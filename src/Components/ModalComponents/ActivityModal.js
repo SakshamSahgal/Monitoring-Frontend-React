@@ -17,9 +17,6 @@ import Button from 'react-bootstrap/Button';
 //closeModal : a function that closes the modal
 
 function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewActivity }) {
-
-    console.log("rendering ActivityModal")
-
     
     const [sliderValue, setSliderValue] = useState(0); // State to manage slider value
 

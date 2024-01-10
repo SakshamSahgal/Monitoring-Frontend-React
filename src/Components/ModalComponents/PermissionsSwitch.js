@@ -10,8 +10,6 @@ function PermissionsSwitch({ permissions, Name, fetchTargets }) {
     fetchTargets()
   };
 
-  console.log(permissions)
-
   return (
     <Form>
       <Form.Check
