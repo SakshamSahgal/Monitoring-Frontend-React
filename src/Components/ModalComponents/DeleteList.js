@@ -16,9 +16,9 @@ function DeleteList({ targetName, deleteList, setDeleteList, viewActivity, setSl
             <div className="row">
                 {deleteList.map((image, index) => {
                     return (
-                        <div className="col-2" key={index}>
+                        <div className="col-sm-12 col-md-6 col-lg-3" key={index}>
                             <div className="card">
-                                <div className="card-header">
+                                <div className="card-header fs-9">
                                     {image}
                                 </div>
                             </div>
