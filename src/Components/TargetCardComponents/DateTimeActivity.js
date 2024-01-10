@@ -1,5 +1,5 @@
-import { convertIsoToNormalTime } from "../Scripts/TimeFunctions";
-import { getTimeElapsed } from "../Scripts/TimeFunctions";
+import { convertIsoToNormalTime } from "../../Scripts/TimeFunctions";
+import { getTimeElapsed } from "../../Scripts/TimeFunctions";
 
 function DateTimeActivity(props) {
 

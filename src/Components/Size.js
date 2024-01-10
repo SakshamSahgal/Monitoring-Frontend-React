@@ -5,6 +5,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { AxiosGET } from "../Scripts/AxiosRequest";
 
 
 
@@ -12,20 +13,8 @@ function SizeBar() {
     const [size, setSize] = useState([]);
 
     const fetchData = async () => {
-        try {
-            const { data } = await axios.get(process.env.REACT_APP_SERVER_HOSTED_ON + "/getUploadsSizeOnDisk", { headers: { Authorization: 'Bearer ' + Cookies.get('token') } });
-
-            if (data.success === false) {
-                alert(data.message);
-                Cookies.remove('token');
-                window.location.href = '/';
-            } else {
-                console.log(data);
-                setSize(data);
-            }
-        } catch (error) {
-            console.error('Error Fetching size:', error);
-        }
+        const response = await AxiosGET("/getUploadsSizeOnDisk",Cookies.get('token'))
+        setSize(response)
     };
 
     useEffect(() => {

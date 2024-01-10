@@ -4,23 +4,12 @@ import Cookies from "js-cookie";
 import DownloadAllButton from "../Components/DownloadAllButton"
 import Navbar from "../Components/navbar";
 import SizeBar from "../Components/Size";
-import axios from "axios";
-import TargetCards from "../Components/TargetCards";
+import TargetCards from "../Components/TargetCardComponents/TargetCards";
+import { AxiosGET } from "../Scripts/AxiosRequest";
 
 function Home() {
 
-    axios.get(process.env.REACT_APP_SERVER_HOSTED_ON + '/validateToken', {
-        headers: { 'Authorization': 'Bearer ' + Cookies.get('token') }
-    }).then((response) => {
-        console.log(response.data);
-        if (response.data.success === false)
-        {
-            Cookies.remove('token');
-            window.location.href = '/';
-        }
-    }).catch((error) => {
-        console.log(error);
-    });
+    AxiosGET('/validateToken',Cookies.get('token'))
 
     return (
         <>
@@ -34,9 +23,7 @@ function Home() {
                 <div className="row">
                     <SizeBar />
                 </div>
-                <div className="row">
                     <TargetCards />
-                </div>
             </div>
         </>
     )
