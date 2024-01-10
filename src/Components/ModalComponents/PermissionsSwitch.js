@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Form } from 'react-bootstrap';
+import { AxiosPUT } from "../../Scripts/AxiosRequest";
 
-function PermissionsSwitch({permissions}) {
+function PermissionsSwitch({permissions,Name}) {
     const [thisPermissions, setPermissions] = useState(permissions);
 
-    const togglePermissions = () => {
+    const togglePermissions = async () => {
+        const response = await AxiosPUT('/togglePermissions/' + Name + "/" + !permissions, {})
+        console.log(response)
         setPermissions(!permissions);
     };
 

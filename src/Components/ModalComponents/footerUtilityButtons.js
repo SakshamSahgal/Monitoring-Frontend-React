@@ -1,8 +1,9 @@
-import { faDownload, faTrash, faAngleLeft, faAngleRight,faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import DeleteFrameButton from "./DeleteFrame";
 import DownloadFrameButton from "./DownloadFrame";
+import DeleteList from "./DeleteList";
 
 function FooterUtilityButtons({ sliderValue, activityArray, targetName, viewActivity, setSliderValue }) {
 
@@ -43,19 +44,8 @@ function FooterUtilityButtons({ sliderValue, activityArray, targetName, viewActi
                 </div>
             </div>
             <div className="row text-center my-3">
-                {deleteList.map((image, index) => {
-                    return (
-                        <div className="col-12" key={index}>
-                            <p>{image}</p>
-                        </div>
-                    )
-                })}
-            </div>
-            <div className="row">
-                <div className="col-12">
-
-                </div>
-            </div>
+                <DeleteList targetName={targetName} deleteList={deleteList} setDeleteList={setDeleteList} viewActivity={viewActivity} setSliderValue={setSliderValue}/>
+            </div>  
         </div>
     )
 }

@@ -21,9 +21,9 @@ async function AxiosGET(APIroute, token) {
 
 async function AxiosPOST(APIroute, token) {
     try {
-        const response = await axios.post(process.env.REACT_APP_SERVER_HOSTED_ON + APIroute,{}, { headers: { 'Authorization': 'Bearer ' + token } });
+        const response = await axios.post(process.env.REACT_APP_SERVER_HOSTED_ON + APIroute, {}, { headers: { 'Authorization': 'Bearer ' + token } });
 
-        console.log(response.data);
+        // console.log(response.data);
 
         if (response.data.success === false) {
             Cookies.remove('token');
@@ -37,4 +37,41 @@ async function AxiosPOST(APIroute, token) {
     }
 }
 
-export { AxiosGET, AxiosPOST }
+async function AxiosPUT(APIroute, data, token) {
+    try {
+        const response = await axios.put(process.env.REACT_APP_SERVER_HOSTED_ON + APIroute, data, { headers: { 'Authorization': 'Bearer ' + token } });
+
+        // console.log(response.data);
+
+        if (response.data.success === false) {
+            Cookies.remove('token');
+            window.location.href = '/';
+        }
+        else
+            return response.data; // Return the response.data
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+}
+
+async function AxiosDELETE(APIroute, data, token) {
+    try {
+        const response = await axios.delete(process.env.REACT_APP_SERVER_HOSTED_ON + APIroute, { headers: { 'Authorization': 'Bearer ' + token }, data: data })
+        
+        // console.log(response.data);
+
+        if(response.data.success === false){
+            Cookies.remove('token');
+            window.location.href = '/';
+        }
+        else
+            return response.data; // Return the response.data
+
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+}
+
+export { AxiosGET, AxiosPOST, AxiosDELETE, AxiosPUT }

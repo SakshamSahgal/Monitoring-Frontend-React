@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import DownloadAllButton from "../Components/DownloadAllButton"
 import Navbar from "../Components/navbar";
 import SizeBar from "../Components/Size";
-import TargetCards from "../Components/TargetCards";
+import TargetCards from "../Components/TargetCardComponents/TargetCards";
 import { AxiosGET } from "../Scripts/AxiosRequest";
 
 function Home() {

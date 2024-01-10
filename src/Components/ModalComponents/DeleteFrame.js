@@ -1,4 +1,4 @@
-import { faTrash,faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrash,faTrashRestore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function DeleteFrameButton({deleteList, setDeleteList, activityArray, sliderValue, setSliderValue}) {
@@ -12,12 +12,16 @@ function DeleteFrameButton({deleteList, setDeleteList, activityArray, sliderValu
             console.log("adding image to delete list " + activityArray[sliderValue])
             setDeleteList([...deleteList, activityArray[sliderValue]]);
         }
+        else {
+            console.log("removing image from delete list " + activityArray[sliderValue])
+            setDeleteList(deleteList.filter(item => item !== activityArray[sliderValue])); //filter returns a new array with the filtered items
+        }
     }
 
     if(deleteList.includes(activityArray[sliderValue])) {
        return (
             <button type="button" className="btn btn-danger w-100" id="deleteFrameButton" onClick={DeleteImage}>
-                <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> { /* Solid trash icon */}
+                <FontAwesomeIcon icon={faTrashRestore} className="me-2" /> { /*  trash restore icon */}
             </button>
         )
     }

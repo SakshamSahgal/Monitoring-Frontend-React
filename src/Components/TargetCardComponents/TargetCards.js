@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import ViewActivity from "./ViewActivity";
-import PermissionsSwitch from "./PermissionsSwitch"
-import DateTimeActivity from "./DateTimeActivity";
-import { AxiosGET } from "../Scripts/AxiosRequest";
+import ViewActivity from "../ViewActivity";
+import PermissionsSwitch from "../ModalComponents/PermissionsSwitch"
+import DateTimeActivity from "../DateTimeActivity";
+import { AxiosGET } from "../../Scripts/AxiosRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
 function TargetCards() {

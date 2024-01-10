@@ -1,8 +1,6 @@
 import { Modal } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import { useState } from 'react';
 import ImageComponent from './imageComponent';
-import { AxiosGET } from '../../Scripts/AxiosRequest';
 import FooterUtilityButtons from './footerUtilityButtons';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,32 +16,31 @@ import Button from 'react-bootstrap/Button';
 //isVisible: a boolean that determines if the modal is visible or not
 //closeModal : a function that closes the modal
 
-function ActivityModal({ targetName, isVisible, closeModal }) {
+function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewActivity }) {
 
     console.log("rendering ActivityModal")
 
-    const [activityArray, setActivityArray] = useState([]);
+    
     const [sliderValue, setSliderValue] = useState(0); // State to manage slider value
 
-    const viewActivity = async () => {
-        console.log("fetching activity data for " + targetName)
-        let data = await AxiosGET('/getActivity/' + targetName, Cookies.get('token'))
-        console.log(data)
-        setActivityArray(data.files)
-    }
-    useEffect(() => {
-        viewActivity(); // this will only run once (on mount)
-    }, []);
 
     if (activityArray.length > 0) {
 
         return (
             <Modal show={isVisible} onHide={closeModal} dialogClassName="modal-lg" className="d-flex align-items-center justify-content-center">
                 <Modal.Header closeButton>
-                    <Modal.Title>Target : {targetName}</Modal.Title>
-                    <Button variant="primary" className="my-3" onClick={viewActivity}>
-                        <FontAwesomeIcon icon={faSync} />
-                    </Button>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-6">
+                                <Modal.Title>Target : {targetName}</Modal.Title>
+                            </div>
+                            <div className="col-6">
+                                <Button variant="primary" className="w-100" onClick={viewActivity}>
+                                    <FontAwesomeIcon icon={faSync} />
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </Modal.Header>
                 <Modal.Body>
                     <ImageComponent activityArray={activityArray} Name={targetName} sliderValue={sliderValue} setSliderValue={setSliderValue} />
