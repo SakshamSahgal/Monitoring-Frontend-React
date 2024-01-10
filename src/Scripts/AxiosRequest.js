@@ -25,7 +25,7 @@ async function AxiosPOST(APIroute, token) {
 
         // console.log(response.data);
 
-        if (response.data.success === false) {
+        if (response.data.success === false && (response.data.message === "Invalid token" || response.data.message === "No token provided")) {
             Cookies.remove('token');
             window.location.href = '/';
         }
@@ -43,7 +43,7 @@ async function AxiosPUT(APIroute, data, token) {
 
         // console.log(response.data);
 
-        if (response.data.success === false) {
+        if (response.data.success === false && (response.data.message === "Invalid token" || response.data.message === "No token provided")) {
             Cookies.remove('token');
             window.location.href = '/';
         }
@@ -61,7 +61,7 @@ async function AxiosDELETE(APIroute, data, token) {
         
         // console.log(response.data);
 
-        if(response.data.success === false){
+        if (response.data.success === false && (response.data.message === "Invalid token" || response.data.message === "No token provided")) {
             Cookies.remove('token');
             window.location.href = '/';
         }

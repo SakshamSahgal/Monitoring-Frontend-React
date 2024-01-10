@@ -1,12 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import ViewActivity from "../ViewActivity";
-import PermissionsSwitch from "../ModalComponents/PermissionsSwitch"
-import DateTimeActivity from "../DateTimeActivity";
 import { AxiosGET } from "../../Scripts/AxiosRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
+
+import ViewActivity from "./ViewActivity";
+import PermissionsSwitch from "../ModalComponents/PermissionsSwitch"
+import DateTimeActivity from "./DateTimeActivity";
+
 function TargetCards() {
 
     const [targets, setTargets] = useState([]);
@@ -48,7 +50,7 @@ function TargetCards() {
                                     <DateTimeActivity Heading="Earliest Activity Stored" ISOTime={target.EarliestActivityStored} />
 
                                     <div className="d-flex justify-content-center">
-                                        <PermissionsSwitch permissions={target.Allowed} />
+                                        <PermissionsSwitch permissions={target.Allowed} Name={target.Name} fetchTargets={fetchTargets}/>
                                     </div>
                                 </div>
 
