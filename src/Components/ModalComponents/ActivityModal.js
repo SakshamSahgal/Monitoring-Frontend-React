@@ -2,24 +2,33 @@ import { Modal } from 'react-bootstrap';
 import { useState } from 'react';
 import ImageComponent from './imageComponent';
 import FooterUtilityButtons from './footerUtilityButtons';
-import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { faSync,faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'react-bootstrap/Button';
+import { AxiosGETWithCustomHeaders } from '../../Scripts/AxiosRequest';
+import Cookies from 'js-cookie';
 
 //this component will be used to display the activity modal when a user clicks on an activity
 //it will display the TargetName, Image, Description, and a button to close the modal
 //the modal will display only when it is called by the ViewActivity component
 
-
-//this Components takes in 3 props
-//targetName: the name of the target the the modal belongs to
-//isVisible: a boolean that determines if the modal is visible or not
-//closeModal : a function that closes the modal
-
 function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewActivity }) {
     
     const [sliderValue, setSliderValue] = useState(0); // State to manage slider value
-
+    const downLoadTargetActvity = async () => {
+        
+        const data = await AxiosGETWithCustomHeaders("/downloadData/" + targetName, {
+            headers: { Authorization: 'Bearer ' + Cookies.get('token') },
+            responseType: 'blob'
+          });
+          const blob = new Blob([data], { type: 'application/zip' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = `${targetName}.zip`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+    }
 
     if (activityArray.length > 0) {
 
@@ -28,12 +37,17 @@ function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewA
                 <Modal.Header closeButton>
                     <div className="container">
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col-4">
                                 <Modal.Title>Target : {targetName}</Modal.Title>
                             </div>
-                            <div className="col-6">
+                            <div className="col-4">
                                 <Button variant="primary" className="w-100" onClick={viewActivity}>
                                     <FontAwesomeIcon icon={faSync} />
+                                </Button>
+                            </div>
+                            <div className="col-4">
+                                <Button variant="dark" className='w-100' onClick={downLoadTargetActvity}>
+                                    <FontAwesomeIcon icon={faDownload} />
                                 </Button>
                             </div>
                         </div>
