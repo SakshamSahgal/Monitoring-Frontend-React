@@ -19,7 +19,7 @@ function DownloadFrameButton({targetName, activityArray, sliderValue}) {
     };
 
     return (
-        <button type="button" className="btn btn-primary w-100" onClick={downloadImage}>
+        <button type="button" className="btn btn-primary w-100 h-100" onClick={downloadImage}>
             <FontAwesomeIcon icon={faDownload} className="me-2" />
         </button>
     )
