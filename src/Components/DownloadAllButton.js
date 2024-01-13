@@ -7,7 +7,7 @@ function DownloadAllButton() {
 
   const downloadEntireData = async () => {
 
-    const data = await AxiosGETWithCustomHeaders("/downloadData", {
+    const data = await AxiosGETWithCustomHeaders("/downloadAllData", {
       headers: { Authorization: 'Bearer ' + Cookies.get('token') },
       responseType: 'blob'
     });

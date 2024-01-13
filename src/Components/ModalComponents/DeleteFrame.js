@@ -20,7 +20,7 @@ function DeleteFrameButton({deleteList, setDeleteList, activityArray, sliderValu
 
     if(deleteList.includes(activityArray[sliderValue])) {
        return (
-            <button type="button" className="btn btn-danger w-100" id="deleteFrameButton" onClick={DeleteImage}>
+            <button type="button" className="btn btn-danger w-100 h-100" id="deleteFrameButton" onClick={DeleteImage}>
                 <FontAwesomeIcon icon={faTrashRestore} className="me-2" /> { /*  trash restore icon */}
             </button>
         )
@@ -28,7 +28,7 @@ function DeleteFrameButton({deleteList, setDeleteList, activityArray, sliderValu
     else
     {
         return (
-            <button type="button" className="btn btn-danger w-100" id="deleteFrameButton" onClick={DeleteImage}>
+            <button type="button" className="btn btn-danger w-100 h-100" id="deleteFrameButton" onClick={DeleteImage}>
                 <FontAwesomeIcon icon={faTrash} className="me-2" /> { /* regular trash icon */}
             </button>
         )

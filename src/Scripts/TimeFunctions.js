@@ -34,4 +34,14 @@ function getTimeElapsed(isoTimeString) {
     }
 }
 
-export { convertIsoToNormalTime, getTimeElapsed };
+function NameToTime(FileName) {
+    // console.log(new Date(parseInt(((FileName).split("_")[1]).split(".")[0])))
+    let thisDate = new Date(parseInt(((FileName).split("_")[1]).split(".")[0]))
+    return thisDate.toLocaleString()
+}
+
+function NameToTimeElapsed(FileName){
+    return getTimeElapsed(parseInt(((FileName).split("_")[1]).split(".")[0]))
+}
+
+export { convertIsoToNormalTime, getTimeElapsed, NameToTime, NameToTimeElapsed };

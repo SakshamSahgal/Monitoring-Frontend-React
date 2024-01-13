@@ -8,13 +8,14 @@ import { faSync } from "@fortawesome/free-solid-svg-icons";
 import ViewActivity from "./ViewActivity";
 import PermissionsSwitch from "../ModalComponents/PermissionsSwitch"
 import DateTimeActivity from "./DateTimeActivity";
+import DownloadTargetButton from "./DownloadTarget";
 
 function TargetCards() {
 
     const [targets, setTargets] = useState([]);
 
     const fetchTargets = async () => {
-        
+
         const response = await AxiosGET("/getTargets", Cookies.get('token'))
         setTargets(response.targets)
 
@@ -45,17 +46,22 @@ function TargetCards() {
                                 </div>
                                 <div className="card-body">
 
-                                    <DateTimeActivity Heading="Last Contact" ISOTime={target.LastContact} />
                                     <DateTimeActivity Heading="First Contact" ISOTime={target.FirstContact} />
-                                    <DateTimeActivity Heading="Earliest Activity Stored" ISOTime={target.EarliestActivityStored} />
 
                                     <div className="d-flex justify-content-center">
-                                        <PermissionsSwitch permissions={target.Allowed} Name={target.Name} fetchTargets={fetchTargets}/>
+                                        <PermissionsSwitch permissions={target.Allowed} Name={target.Name} fetchTargets={fetchTargets} />
                                     </div>
                                 </div>
 
                                 <div className="card-footer">
-                                    <ViewActivity Name={target.Name} />
+                                    <div className="container">
+                                        <div className="row my-3">
+                                            <DownloadTargetButton targetName={target.Name}/>
+                                        </div>
+                                        <div className="row">
+                                            <ViewActivity Name={target.Name} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
