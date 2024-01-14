@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { NameToTimeElapsed } from '../../Scripts/TimeFunctions';
 
 function ImageComponent({ activityArray, Name, sliderValue, setSliderValue }) {
 
@@ -10,7 +11,10 @@ function ImageComponent({ activityArray, Name, sliderValue, setSliderValue }) {
     return (
         <>
             <div className="row text-center">
+                <hr />
                 <p>Frame: {sliderValue + 1} / {activityArray.length}  ({activityArray[sliderValue]}) </p>
+                <kbd>{NameToTimeElapsed(activityArray[sliderValue])}</kbd>
+                <hr />
             </div>
             <div className="row">
                 <div className="img-container" style={{ maxHeight: '80vh', overflow: 'hidden' }}>

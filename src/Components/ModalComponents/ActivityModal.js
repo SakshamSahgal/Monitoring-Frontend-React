@@ -22,7 +22,7 @@ function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewA
 
         return (
             <Modal show={isVisible} onHide={closeModal} dialogClassName="modal-lg" className="d-flex align-items-center justify-content-center">
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='bg-info bg-opacity-25'>
                     <div className="container">
                         <div className="row">
                             <div className="col-12 text-center">
