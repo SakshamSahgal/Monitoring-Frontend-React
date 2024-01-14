@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {AxiosPOST} from '../Scripts/AxiosRequest';
+
 
 const Login = () => {
 

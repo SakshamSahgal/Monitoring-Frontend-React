@@ -2,18 +2,16 @@ import { Modal } from 'react-bootstrap';
 import { useState } from 'react';
 import ImageComponent from './imageComponent';
 import FooterUtilityButtons from './footerUtilityButtons';
-import { faSync, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'react-bootstrap/Button';
-import { AxiosGETWithCustomHeaders } from '../../Scripts/AxiosRequest';
-import Cookies from 'js-cookie';
 import TimeModal from './TimeModal';
 
 //this component will be used to display the activity modal when a user clicks on an activity
 //it will display the TargetName, Image, Description, and a button to close the modal
 //the modal will display only when it is called by the ViewActivity component
 
-function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewActivity }) {
+function ActivityModal({ targetName, sizeInBytes, isVisible, closeModal, activityArray, viewActivity }) {
 
     const [sliderValue, setSliderValue] = useState(0); // State to manage slider value
 
@@ -26,11 +24,13 @@ function ActivityModal({ targetName, isVisible, closeModal, activityArray, viewA
                     <div className="container">
                         <div className="row">
                             <div className="col-12 text-center">
-                                <Modal.Title>Target : {targetName}</Modal.Title>
+                                <Modal.Title>Target : {targetName} </Modal.Title>
+                                <span>{(sizeInBytes/(1024*1024)).toFixed(2)} MB</span>
                             </div>
                         </div>
                     </div>
                 </Modal.Header>
+                
                 <Modal.Body>
                     <hr />
                     <div className="container">

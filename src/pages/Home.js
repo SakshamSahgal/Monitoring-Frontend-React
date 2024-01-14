@@ -2,7 +2,7 @@
 
 import Cookies from "js-cookie";
 import DownloadAllButton from "../Components/DownloadAllButton"
-import Navbar from "../Components/navbar";
+import Navbar from "../Components/Navbar";
 import SizeBar from "../Components/Size";
 import TargetCards from "../Components/TargetCardComponents/TargetCards";
 import { AxiosGET } from "../Scripts/AxiosRequest";
