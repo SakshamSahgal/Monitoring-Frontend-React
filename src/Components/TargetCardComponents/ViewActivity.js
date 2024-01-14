@@ -11,7 +11,7 @@ function ViewActivity({Name}) {
 
     const viewActivity = async () => {
         console.log("fetching activity data for " + Name)
-        let data = await AxiosGET('/getActivity/' + Name, Cookies.get('token'))
+        let data = await AxiosGET('/getActivity/' + Name,{}, Cookies.get('token'))
         console.log(data)
         setActivityArray(data.files)
         setSizeInBytes(data.sizeInBytes)

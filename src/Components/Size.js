@@ -13,7 +13,7 @@ function SizeBar() {
     const [size, setSize] = useState([]);
 
     const fetchData = async () => {
-        const response = await AxiosGET("/getUploadsSizeOnDisk",Cookies.get('token'))
+        const response = await AxiosGET("/getUploadsSizeOnDisk",{},Cookies.get('token'))
         setSize(response)
     };
 

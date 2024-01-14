@@ -9,7 +9,7 @@ import { AxiosGET } from "../Scripts/AxiosRequest";
 
 function Home() {
 
-    AxiosGET('/validateToken',Cookies.get('token'))
+    AxiosGET('/validateToken',{},Cookies.get('token'))
 
     return (
         <>

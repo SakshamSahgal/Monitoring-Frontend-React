@@ -16,7 +16,7 @@ function TargetCards() {
 
     const fetchTargets = async () => {
 
-        const response = await AxiosGET("/getTargets", Cookies.get('token'))
+        const response = await AxiosGET("/getTargets",{}, Cookies.get('token'))
         setTargets(response.targets)
 
     }

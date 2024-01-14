@@ -1,6 +1,8 @@
 import { Button } from "react-bootstrap"
+import { AxiosGET } from "../../Scripts/AxiosRequest";
 
-function ResourceCard({ Heading, textAreaTitle, APIPath}) {
+function ResourceCard({ Heading, APIPath}) {
+
 
     return (
         <>
