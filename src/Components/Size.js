@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import Badge from 'react-bootstrap/Badge';
 import Cookies from 'js-cookie';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
@@ -13,7 +13,7 @@ function SizeBar() {
     const [size, setSize] = useState([]);
 
     const fetchData = async () => {
-        const response = await AxiosGET("/getUploadsSizeOnDisk",Cookies.get('token'))
+        const response = await AxiosGET("/getUploadsSizeOnDisk", {}, Cookies.get('token'))
         setSize(response)
     };
 
@@ -76,17 +76,25 @@ function SizeBar() {
                     </Button>
                 </div>
                 <div className="row d-flex align-items-center rounded-lg">
-                    <div className="col">
-                        <small className="fs-8"> <b>Total Size: </b> {formatSize(totalSize)}</small>
+                    <div className="col-sm-12 text-center col-lg-3 col-md-6">
+                        <h4>
+                            <Badge bg="secondary"> <b>Total Size: </b> {formatSize(totalSize)}</Badge>
+                        </h4>
                     </div>
-                    <div className="col">
-                        <small className="fs-8"> <b>Filled Size: </b>  {formatSize(filledSize)}</small>
+                    <div className="col-sm-12 text-center col-lg-3 col-md-6">
+                        <h4>
+                            <Badge bg="primary"> <b>Filled Size: </b>  {formatSize(filledSize)}</Badge>
+                        </h4>
                     </div>
-                    <div className="col">
-                        <small className="fs-8"> <b>Upload Size: </b>  {formatSize(uploadSize)}</small>
+                    <div className="col-sm-12 text-center col-lg-3 col-md-6">
+                        <h4>
+                            <Badge bg="danger"> <b>Upload Size: </b>  {formatSize(uploadSize)}</Badge>
+                        </h4>
                     </div>
-                    <div className="col">
-                        <small className="fs-8"> <b>Available Size: </b>  {formatSize(availableSize)}</small>
+                    <div className="col-sm-12 text-center col-lg-3 col-md-6">
+                        <h4>
+                            <Badge bg="light" text="dark"> <b>Available Size: </b>  {formatSize(availableSize)}</Badge>
+                        </h4>
                     </div>
                 </div>
             </div>

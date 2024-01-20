@@ -40,8 +40,40 @@ function NameToTime(FileName) {
     return thisDate.toLocaleString()
 }
 
+// Function to format the time since last active
+function formatLastActive(seconds) {
+    const days = Math.floor(seconds / (3600 * 24));
+    seconds %= 3600 * 24;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+
+    const formattedTime = [];
+
+    if (days > 0) {
+        formattedTime.push(`${days} days`);
+    }
+    if (hours > 0) {
+        formattedTime.push(`${hours} hours`);
+    }
+    if (minutes > 0) {
+        formattedTime.push(`${minutes} minutes`);
+    }
+    if (seconds > 0) {
+        //round to 2 decimal places
+        seconds = Math.round(seconds * 100) / 100;
+        formattedTime.push(`${seconds} seconds ago`);
+    }
+
+    return formattedTime.join(' & ');
+}
+
+
 function NameToTimeElapsed(FileName){
-    return getTimeElapsed(parseInt(((FileName).split("_")[1]).split(".")[0]))
+    let thisDate = new Date(parseInt(((FileName).split("_")[1]).split(".")[0]))
+    let seconds = (new Date() - thisDate) / 1000;
+    return formatLastActive(seconds)
 }
 
 export { convertIsoToNormalTime, getTimeElapsed, NameToTime, NameToTimeElapsed };

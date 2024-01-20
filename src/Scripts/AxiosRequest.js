@@ -1,9 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-async function AxiosGET(APIroute, token) {
+async function AxiosGET(APIroute, data, token) {
     try {
-        const response = await axios.get(APIroute, { headers: { 'Authorization': 'Bearer ' + token } });
+        const response = await axios.get(APIroute, { headers: { 'Authorization': 'Bearer ' + token } },{data : data});
 
         // console.log(response.data);
 
