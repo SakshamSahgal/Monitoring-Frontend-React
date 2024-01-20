@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { NameToTimeElapsed } from '../../Scripts/TimeFunctions';
+import ImageDisplay from './ImageDisplay';
 
 function ImageComponent({ activityArray, Name, sliderValue, setSliderValue }) {
 
@@ -17,13 +17,7 @@ function ImageComponent({ activityArray, Name, sliderValue, setSliderValue }) {
                 <hr />
             </div>
             <div className="row">
-                <div className="img-container" style={{ maxHeight: '80vh', overflow: 'hidden' }}>
-                    <img
-                        src={axios.defaults.baseURL + '/' + Name + '/' + activityArray[sliderValue]}
-                        alt={`Image ${sliderValue}`}
-                        className="img-fluid"
-                    />
-                </div>
+                <ImageDisplay activityArray={activityArray} sliderValue={sliderValue} Name={Name} />
             </div>
             <div className="row my-3">
                 <input className='w-100' type="range" min={0} max={activityArray.length - 1} step={1} value={sliderValue} onChange={handleChange} />

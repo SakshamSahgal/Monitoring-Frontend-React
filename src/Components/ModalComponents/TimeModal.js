@@ -13,12 +13,12 @@ const TimeModal = ({ activityArray }) => {
   return (
     <div>
       <Button variant="primary" onClick={handleShow} className='w-100 h-100'>
-        Activity Time Range
+        Time Range
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Activity Time Range</Modal.Title>
+          <Modal.Title>Time Range</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="container">
