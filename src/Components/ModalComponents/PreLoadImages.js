@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 const PreloadImages = ({ imageUrls, targetName, Quality }) => {
     const preloadImages = () => {
         imageUrls.forEach((imageUrl) => {
-            console.log(axios.defaults.baseURL + "/" + targetName + "/" + Quality + "/" + imageUrl + (Quality === "HighQuality" ? ".png" : ".jpg"));
+            // console.log(axios.defaults.baseURL + "/" + targetName + "/" + Quality + "/" + imageUrl + (Quality === "HighQuality" ? ".png" : ".jpg"));
             const img = new Image();
             img.src = axios.defaults.baseURL + "/" + targetName + "/" + Quality + "/" + imageUrl + (Quality === "HighQuality" ? ".png" : ".jpg");
         });
