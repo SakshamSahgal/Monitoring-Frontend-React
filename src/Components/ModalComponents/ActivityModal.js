@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'react-bootstrap/Button';
 import TimeModal from './TimeModal';
 import PreloadImages from './PreLoadImages';
+import PlayModal from './PlayModal';
 //this component will be used to display the activity modal when a user clicks on an activity
 //it will display the TargetName, Image, Description, and a button to close the modal
 //the modal will display only when it is called by the ViewActivity component
@@ -35,15 +36,18 @@ function ActivityModal({ targetName, sizeInBytes, isVisible, closeModal, activit
                     <hr />
                     <div className="container">
                         <div className="row my-3">
-                            <div className="col-4">
+                            <div className="col-3">
                                 <Button variant="primary" className="w-100 h-100" onClick={viewActivity}>
                                     <FontAwesomeIcon icon={faSync} />
                                 </Button>
                             </div>
-                            <div className="col-4 text-center">
+                            <div className="col-3 text-center">
                             <PreloadImages imageUrls={activityArray} targetName={targetName} Quality={"LowQuality"}/>
                             </div>
-                            <div className="col-4 text-center">
+                            <div className="col-3">
+                                <PlayModal imageSources={activityArray} Quality={"HighQuality"} targetName={targetName}/>
+                            </div>
+                            <div className="col-3 text-center">
                                 <TimeModal activityArray={activityArray} />
                             </div>
                         </div>
